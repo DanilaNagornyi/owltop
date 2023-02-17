@@ -1,19 +1,21 @@
 .wrapperFooter {
   display: grid;
-  background: var(--primary);
-  color: var(--white);
-  min-height: 72px;
-  gap: 40px;
-  padding: 25px 30px;
   grid-template-columns: 1fr auto auto;
+  gap: 40px;
   grid-template-areas:
     "copyright userContract political";
+  background: var(--primary);
+  color: var(--white);
+  line-height: 20px;
+  min-height: 72px;
+  padding: 25px 30px;
 
   & a:hover {
     color: var(--gray-light);
   }
 
-  @media (max-width: 965px) {
+  @media (max-width: 765px) {
+    gap: 10px;
     grid-template-columns: minmax(320px, 1fr);
     grid-template-areas:
      "copyright"
@@ -32,7 +34,7 @@
   justify-self: end;
   align-self: center;
 
-  @media (max-width: 965px) {
+  @media (max-width: 765px) {
     justify-self: start;
   }
 }
@@ -42,7 +44,7 @@
   justify-self: end;
   align-self: center;
 
-  @media (max-width: 965px) {
+  @media (max-width: 765px) {
     justify-self: start;
   }
 

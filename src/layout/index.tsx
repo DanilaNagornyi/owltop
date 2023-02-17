@@ -1,6 +1,5 @@
-import React, {Component, FunctionComponent} from "react";
+import React, {FunctionComponent} from "react";
 import {LayoutPropsTypes} from "./types";
-import cn from "classnames";
 import s from "./Layout.module.scss";
 import Header from "./Header";
 import SideBar from "./SideBar";
