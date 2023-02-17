@@ -1,0 +1,51 @@
+.wrapperFooter {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 40px;
+  grid-template-areas:
+    "copyright userContract political";
+  background: var(--primary);
+  color: var(--white);
+  line-height: 20px;
+  min-height: 72px;
+  padding: 25px 30px;
+
+  & a:hover {
+    color: var(--gray-light);
+  }
+
+  @media (max-width: 765px) {
+    gap: 10px;
+    grid-template-columns: minmax(320px, 1fr);
+    grid-template-areas:
+     "copyright"
+     "userContract"
+     "political";
+  }
+}
+
+.copyright {
+  grid-area: copyright;
+  align-self: center;
+}
+
+.userContract{
+  grid-area: userContract;
+  justify-self: end;
+  align-self: center;
+
+  @media (max-width: 765px) {
+    justify-self: start;
+  }
+}
+
+.political {
+  grid-area: political;
+  justify-self: end;
+  align-self: center;
+
+  @media (max-width: 765px) {
+    justify-self: start;
+  }
+
+}
