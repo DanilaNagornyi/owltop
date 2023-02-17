@@ -4,8 +4,9 @@ import PTag from "../components/PTag";
 import Button from "../components/Button";
 import {useState} from "react";
 import Rating from "../components/Rating";
+import {withLayout} from "../layout";
 
-export default function Home() {
+function Home() {
     const [rating, setRating] = useState<number>(3);
   return (
       <>
@@ -20,3 +21,5 @@ export default function Home() {
       </>
   );
 }
+
+export default withLayout(Home);

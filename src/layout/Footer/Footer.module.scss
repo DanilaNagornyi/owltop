@@ -1,0 +1,49 @@
+.wrapperFooter {
+  display: grid;
+  background: var(--primary);
+  color: var(--white);
+  min-height: 72px;
+  gap: 40px;
+  padding: 25px 30px;
+  grid-template-columns: 1fr auto auto;
+  grid-template-areas:
+    "copyright userContract political";
+
+  & a:hover {
+    color: var(--gray-light);
+  }
+
+  @media (max-width: 965px) {
+    grid-template-columns: minmax(320px, 1fr);
+    grid-template-areas:
+     "copyright"
+     "userContract"
+     "political";
+  }
+}
+
+.copyright {
+  grid-area: copyright;
+  align-self: center;
+}
+
+.userContract{
+  grid-area: userContract;
+  justify-self: end;
+  align-self: center;
+
+  @media (max-width: 965px) {
+    justify-self: start;
+  }
+}
+
+.political {
+  grid-area: political;
+  justify-self: end;
+  align-self: center;
+
+  @media (max-width: 965px) {
+    justify-self: start;
+  }
+
+}
