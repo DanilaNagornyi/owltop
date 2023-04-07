@@ -2,12 +2,14 @@ import Htag from "../components/Htag";
 import Tag from "../components/Tag";
 import PTag from "../components/PTag";
 import Button from "../components/Button";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Rating from "../components/Rating";
 import {withLayout} from "../layout";
 import axios from "axios";
 import {GetStaticProps} from "next";
 import {MenuItemTypes} from "../interfaces/menu.interface";
+import {useAppDispatch} from "../redux";
+import findMenuFirstThunk from "../redux/thunks/menuThunks/findMenuFirstThunk";
 
 interface HomePropsTypes extends Record<string, unknown>{
     menu: MenuItemTypes[],
@@ -15,6 +17,12 @@ interface HomePropsTypes extends Record<string, unknown>{
 }
 function Home({ menu, firstCategory }: HomePropsTypes) {
     const [rating, setRating] = useState<number>(3);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(findMenuFirstThunk());
+    }, []);
+
   return (
       <>
           <Htag tag="h1">Text</Htag>

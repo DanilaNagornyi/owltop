@@ -5,7 +5,7 @@ import Menu from "../Menu";
 export default function SideBar({...props}: SideBarPropsTypes): JSX.Element {
     return (
        <div {...props}>
-           {/*<Menu />*/}
+           <Menu />
            меню
        </div>
         );
