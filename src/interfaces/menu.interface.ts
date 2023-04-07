@@ -11,6 +11,7 @@ export interface MenuItemTypes {
     _id: {
         secondCategory: string;
     };
+    isOpened?: boolean;
     pages: PageItemTypes[];
 }
 
