@@ -1,4 +1,4 @@
-import React, {ButtonHTMLAttributes, DetailedHTMLProps, HTMLAttributes, ReactNode} from "react";
+import {DetailedHTMLProps, HTMLAttributes} from "react";
 
-export interface SideBarPropsTypes extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>{
+export interface SideBarPropsTypes extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
 }

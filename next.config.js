@@ -1,34 +1,34 @@
-/** @type {import('next').NextConfig} */
+/** @[type] {import('next').NextConfig} */
 
 const nextConfig = {
-  reactStrictMode: true,
-  images: {
-    domains: ['courses-top.ru']
-  },
-  webpack(config, options) {
-    config.module.rules.push({
-      loader: '@svgr/webpack',
-      issuer: /\.[jt]sx?/,
-      options: {
-        prettier: false,
-        svgo: true,
-        svgoConfig: {
-          plugins: [{
-            name: 'preset-default',
-            params: {
-              override: {
-                removeViewBox: false
-                }
+    reactStrictMode: true,
+    images: {
+        domains: ['[type]-top.ru']
+    },
+    webpack(config, options) {
+        config.module.rules.push({
+            loader: '@svgr/webpack',
+            issuer: /\.[jt]sx?/,
+            options: {
+                prettier: false,
+                svgo: true,
+                svgoConfig: {
+                    plugins: [{
+                        name: 'preset-default',
+                        params: {
+                            override: {
+                                removeViewBox: false
+                            }
+                        },
+                    }],
+                },
+                titleProp: true,
             },
-          }],
-        },
-        titleProp: true,
-      },
-      test: /\.svg$/,
-    });
+            test: /\.svg$/,
+        });
 
-    return config;
-  },
+        return config;
+    },
 };
 
 module.exports = nextConfig;
