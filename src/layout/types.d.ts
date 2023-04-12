@@ -1,5 +1,5 @@
-import React, { ReactNode} from "react";
+import {ReactNode} from "react";
 
-export interface LayoutPropsTypes{
+export interface LayoutPropsTypes {
     children: ReactNode;
 }

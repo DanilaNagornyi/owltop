@@ -50,7 +50,13 @@
   border-left: 1px solid var(--gray-pallets-40);
 }
 
+.secondLevelBlock {
+  display: none;
+}
+
 .secondLevelBlockOpened {
+  display: block;
+
   &:last-child {
     margin-bottom: 20px;
   }
