@@ -1,18 +1,19 @@
-import {HtagPropsTypes} from "./Htag.types";
+import {HTagPropsTypes} from "./Htag.types";
 import s from './Htag.module.scss';
+import cn from "classnames";
 
-const Htag = ({ tag, children }: HtagPropsTypes): JSX.Element => {
+const HTag = ({tag, className, children, ...restProps}: HTagPropsTypes): JSX.Element => {
 
-    switch (tag) {
-        case 'h1':
-            return <h1 className={s.h1}>{children}</h1>;
-        case 'h2':
-            return <h2 className={s.h2}>{children}</h2>;
-        case 'h3':
-            return <h3 className={s.h3}>{children}</h3>;
-        default:
-            return <></>;
-    }
+  switch (tag) {
+    case 'h1':
+      return <h1 className={cn(s.h1, className)}>{children}</h1>;
+    case 'h2':
+      return <h2 className={cn(s.h2, className)}>{children}</h2>;
+    case 'h3':
+      return <h3 className={cn(s.h3, className)}>{children}</h3>;
+    default:
+      return <></>;
+  }
 
 };
-export default Htag;
+export default HTag;

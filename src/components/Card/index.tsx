@@ -6,8 +6,14 @@ import cn from "classnames";
 import s from './Card.module.scss';
 
 
-const Card: FC<CardTypes> = ({className, ...restProps}) => {
-  return <div className={cn(s.wrapper, className)} {...restProps}>Card</div>;
+const Card: FC<CardTypes> = ({color = 'white', children, className, ...restProps}) => {
+  return (
+    <div className={cn(s.wrapper, className, {
+      [s.blue]: color === 'blue'
+    })} {...restProps}>
+      {children}
+    </div>
+  );
 };
 
 export default Card;

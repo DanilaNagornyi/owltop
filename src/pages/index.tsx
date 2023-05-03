@@ -1,4 +1,4 @@
-import Htag from "../components/Htag";
+import HTag from "../components/Htag";
 import Tag from "../components/Tag";
 import PTag from "../components/PTag";
 import Button from "../components/Button";
@@ -18,7 +18,7 @@ function Home() {
 
   return (
     <>
-      <Htag tag="h1">Text</Htag>
+      <HTag tag="h1">Text</HTag>
       <Button appearance='primary' arrow='right'>Hello</Button>
       <Button appearance='ghost' arrow='right'>Hello People yoyo</Button>
       <PTag size="medium">Test props in p</PTag>
