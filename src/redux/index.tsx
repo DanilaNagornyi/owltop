@@ -2,6 +2,7 @@ import {Action, configureStore} from "@reduxjs/toolkit";
 import menuReducer from "./slices/menuSlice";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {createWrapper} from "next-redux-wrapper";
+import sortReducer from "./slices/sortSlice";
 
 const makeStore = () => {
   // const publicRuntimeConfig = getRuntimeConfig();
@@ -11,6 +12,7 @@ const makeStore = () => {
   return configureStore({
     reducer: {
       menu: menuReducer,
+      sort: sortReducer,
     }
 
     // middleware: getDefaultMiddleware => {

@@ -1,5 +1,5 @@
-import React from 'react';
 import type {FC} from 'react';
+import React from 'react';
 import {TopPagePropsTypes} from "./types";
 import HTag from "../../Htag";
 import Tag from "../../Tag";
@@ -8,27 +8,32 @@ import s from './TopPage.module.scss';
 import HhData from "../../HhData";
 import {TopLevelCategoryTypes} from "../../../interfaces/page.interface";
 import AdvantagesCard from "./components/AdvantagesCard";
+import Sort from "../../Sort";
+import {SortEnum} from "../../Sort/types";
+import {useAppDispatch, useAppSelector} from "../../../redux";
+import {setSort} from "../../../redux/slices/sortSlice";
 
 const TopPageComponent: FC<TopPagePropsTypes> = ({firstCategory, page, products}) => {
-
+  const {products: sortProducts, sort: sortState} = useAppSelector(state => state.sort);
+  const dispatch = useAppDispatch();
   const hhCleanData = page.hh;
   if (hhCleanData) {
     delete hhCleanData.updatedAt; // React ругает поле updatedAt
   }
-
-  console.log('page-->', page);
-  console.log('products-->', products);
+  const handleSort = (sort: SortEnum) => {
+    dispatch(setSort(sort));
+  };
 
   return (
     <div className={s.wrapper}>
       <div className={s.wrapperTitle}>
         <HTag tag="h1">{page.title}</HTag>
         {products && <Tag color="grey" size="medium">{products.length}</Tag>}
-        <span>Сортировка</span>
+        <Sort sort={sortState} setSort={handleSort}/>
       </div>
 
       <div>
-        {products && products.map(p => (<div key={p._id}>{p.title}</div>))}
+        {sortProducts && sortProducts.map(p => (<div key={p._id}>{p.title}</div>))}
       </div>
 
       <div className={s.wrapperHH}>
