@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import type {FC} from 'react';
 import {MenuItemTypes} from "../../interfaces/menu.interface";
 import {TopPageModelTypes} from "../../interfaces/page.interface";
@@ -10,6 +10,8 @@ import axios from "axios";
 import {firstLevelMenu} from "../../helpers/helpers";
 import {TopPagePropsTypes} from "../../components/PageComponents/TopPage/types";
 import TopPageComponent from "../../components/PageComponents/TopPage";
+import {useAppDispatch, useAppSelector, wrapper} from "../../redux";
+import {setStaticMenu} from "../../redux/slices/menuSlice";
 
 const TopPage: FC<TopPagePropsTypes> = ({firstCategory, page, products}) => {
 
@@ -33,7 +35,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<TopPagePropsTypes> = async ({params}: GetStaticPropsContext<ParsedUrlQuery>) => {
+export const getStaticProps: GetStaticProps = wrapper.getStaticProps(store => async ({params}: GetStaticPropsContext<ParsedUrlQuery>) => {
 
   if (!params) {
     return {
@@ -65,6 +67,8 @@ export const getStaticProps: GetStaticProps<TopPagePropsTypes> = async ({params}
       limit: 10,
     });
 
+    await store.dispatch(setStaticMenu(menu));
+
     return {
       props: {
         firstCategory: firstCategoryIcon.id,
@@ -77,4 +81,4 @@ export const getStaticProps: GetStaticProps<TopPagePropsTypes> = async ({params}
       notFound: true
     };
   }
-};
+});

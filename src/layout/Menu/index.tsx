@@ -50,7 +50,7 @@ export default function Menu(): JSX.Element {
             <div key={m._id.secondCategory}>
               <div className={s.secondLevel}
                    onClick={() => handleOpenSecondLevel(m._id.secondCategory)}>{m._id.secondCategory}</div>
-              <div className={cn(s.secondLevelBlock, {
+              <div className={cn(s.secondLevelMenu, {
                 [s.secondLevelBlockOpened]: isOpened || activeMenu === m._id.secondCategory,
               })}>
                 {buildThirdLevel(m.pages, menuItem.route)}
@@ -76,6 +76,7 @@ export default function Menu(): JSX.Element {
 
   return (
     <div className={s.menu}>
+      {/*<div className={s.secondLevelBlock}>test</div>*/}
       {buildFirstLevel()}
     </div>
   );
