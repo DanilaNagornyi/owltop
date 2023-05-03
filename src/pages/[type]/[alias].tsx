@@ -10,8 +10,9 @@ import axios from "axios";
 import {firstLevelMenu} from "../../helpers/helpers";
 import {TopPagePropsTypes} from "../../components/PageComponents/TopPage/types";
 import TopPageComponent from "../../components/PageComponents/TopPage";
-import {useAppDispatch, useAppSelector, wrapper} from "../../redux";
+import { wrapper} from "../../redux";
 import {setStaticMenu} from "../../redux/slices/menuSlice";
+import {setProductsSort} from "../../redux/slices/sortSlice";
 
 const TopPage: FC<TopPagePropsTypes> = ({firstCategory, page, products}) => {
 
@@ -68,6 +69,7 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(store => as
     });
 
     await store.dispatch(setStaticMenu(menu));
+    await store.dispatch(setProductsSort(products));
 
     return {
       props: {
