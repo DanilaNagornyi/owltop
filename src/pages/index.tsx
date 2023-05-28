@@ -10,6 +10,8 @@ import {GetServerSideProps} from "next";
 
 import {useAppSelector, wrapper} from "../redux";
 import findMenuFirstThunk from "../redux/thunks/menuThunks/findMenuFirstThunk";
+import InputText from "../components/InputText";
+import InputTextArea from "../components/InputTextArea";
 
 function Home() {
   const {menu} = useAppSelector(state => state.menu);
@@ -29,6 +31,8 @@ function Home() {
       <ul>
         {menu.map(m => (<li key={m._id.secondCategory}>{m._id.secondCategory}</li>))}
       </ul>
+      <InputText placeholder="Имя"/>
+      <InputTextArea placeholder="Имя" type="textarea"/>
     </>
   );
 }
