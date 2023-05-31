@@ -12,6 +12,7 @@ import Sort from "../../Sort";
 import {SortEnum} from "../../Sort/types";
 import {useAppDispatch, useAppSelector} from "../../../redux";
 import {setSort} from "../../../redux/slices/sortSlice";
+import Products from "../../Products";
 
 const TopPageComponent: FC<TopPagePropsTypes> = ({firstCategory, page, products}) => {
   const {products: sortProducts, sort: sortState} = useAppSelector(state => state.sort);
@@ -33,7 +34,7 @@ const TopPageComponent: FC<TopPagePropsTypes> = ({firstCategory, page, products}
       </div>
 
       <div>
-        {sortProducts && sortProducts.map(p => (<div key={p._id}>{p.title}</div>))}
+        {sortProducts && sortProducts.map(p => (<Products product={p} key={p._id}/>))}
       </div>
 
       <div className={s.wrapperHH}>
