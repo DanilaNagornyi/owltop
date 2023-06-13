@@ -8,13 +8,20 @@ import Rating from "../Rating";
 import cn from "classnames";
 import Tag from "../Tag";
 import Button from "../Button";
-import {priceRu} from "../../helpers/helpers";
+import {declOfNum, priceRu} from "../../helpers/helpers";
 import Divider from "../Divider";
+import Image from "next/image";
 
 const Products: FC<ProductsTypes> = ({product, className}) => {
   return (
     <Card className={cn(s.card, className)}>
-      <div className={s.logo}><img src={process.env.NEXT_PUBLIC_DOMAIN + product.image} alt={product.title}/></div>
+      <div className={s.logo}>
+        <Image
+          src={process.env.NEXT_PUBLIC_DOMAIN + product.image}
+          alt={product.title}
+          width={70}
+          height={70}/>
+      </div>
       <div className={s.title}>{product.title}</div>
 
       <div className={s.price}>
@@ -36,12 +43,21 @@ const Products: FC<ProductsTypes> = ({product, className}) => {
       </div>
       <div className={s.priceTitle}>цена</div>
       <div className={s.creditTitle}>кредит</div>
-      <div className={s.rateTitle}>{product.reviewCount} отзывов</div>
+      <div
+        className={s.rateTitle}>{product.reviewCount} {declOfNum(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}</div>
 
       <Divider className={s.line}/>
 
       <div className={s.description}>{product.description}</div>
-      <div className={s.feature}>фичи</div>
+      <div className={s.feature}>
+        {product.characteristics.map(c => (
+          <div className={s.characteristics} key={c.name}>
+            <span className={s.charName}>{c.name}</span>
+            <span className={s.charDots}/>
+            <span className={s.charValue}>{c.value}</span>
+          </div>
+        ))}
+      </div>
 
       <div className={s.advantagesWrapper}>
         {product.advantages ? (
