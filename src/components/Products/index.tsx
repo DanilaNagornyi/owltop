@@ -75,7 +75,7 @@ const Products: FC<ProductsTypes> = ({product, className}) => {
         ) : null}
       </div>
 
-      <Divider className={s.line}/>
+      <Divider className={cn(s.line, s.line2)}/>
 
       <div className={s.actions}>
         <Button>Узнать подробнее</Button>
