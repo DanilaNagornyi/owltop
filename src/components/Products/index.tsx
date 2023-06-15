@@ -12,6 +12,7 @@ import {declOfNum, priceRu} from "../../helpers/helpers";
 import Divider from "../Divider";
 import Image from "next/image";
 import Review from "../Review";
+import ReviewForm from "../Forms/ReviewForm";
 
 const Products: FC<ProductsTypes> = ({product, className}) => {
   const [isReviewOpen, setIsReviewOpen] = useState<boolean>(false);
@@ -100,8 +101,12 @@ const Products: FC<ProductsTypes> = ({product, className}) => {
         [s.closed]: !isReviewOpen,
       })}>
         {product.reviews.map(r => (
-          <Review key={r._id} review={r}/>
+          <>
+            <Review key={r._id} review={r}/>
+            <Divider/>
+          </>
         ))}
+        <ReviewForm productId={product._id}/>
       </Card>
     </>
   );
