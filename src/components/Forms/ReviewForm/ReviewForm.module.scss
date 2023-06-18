@@ -61,3 +61,20 @@
   right: 20px;
   cursor: pointer;
 }
+
+.wrapperError {
+  position: relative;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 6px;
+
+  background: var(--red-light);
+}
+
+.errorClose {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  stroke: var(--black);
+}

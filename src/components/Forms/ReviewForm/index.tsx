@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import type {FC} from 'react';
-import {ReviewFormTypes, ReviewUseFormTypes} from "./types";
+import {ReviewFormTypes, ReviewResponseTypes, ReviewUseFormTypes} from "./types";
 import cn from "classnames";
 
 import s from './ReviewForm.module.scss';
@@ -10,13 +10,35 @@ import InputTextArea from "../../InputTextArea";
 import Button from "../../Button";
 import CloseIcon from './img/close.svg';
 import {Controller, useForm} from "react-hook-form";
+import axios from "axios";
+import {apiUrls} from "../../../helpers/apiUrls";
 
 const ReviewForm: FC<ReviewFormTypes> = ({productId, className, ...restProps}) => {
-  const {register, control, handleSubmit, formState: {errors}} = useForm<ReviewUseFormTypes>();
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const {register, control, handleSubmit, formState: {errors}, reset} = useForm<ReviewUseFormTypes>();
 
-  const onSubmit = (data: ReviewUseFormTypes) => {
-    console.log('data-->', data);
+  const onSubmit = async (formData: ReviewUseFormTypes) => {
+    try {
+      const {data} = await axios.post<ReviewResponseTypes>(apiUrls.review.createReview, {...formData, productId});
+      console.log('response-->>.', data);
+      if (data.message) {
+        setIsSuccess(true);
+        reset();
+      } else {
+        setErrorMessage('Что-то пошло не так');
+      }
+    } catch (e) {
+      console.error(e);
+      setErrorMessage('Что-то пошло не так, мы уже чиним :)');
+    }
   };
+
+  const handleCloseSubmitInfo = () => {
+    setErrorMessage('');
+    setIsSuccess(false);
+  };
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -54,13 +76,24 @@ const ReviewForm: FC<ReviewFormTypes> = ({productId, className, ...restProps}) =
           <span className={s.submitInfo}>* Перед публикацией отзыв пройдет предварительную модерацию и проверку</span>
         </div>
       </div>
-      <div className={s.wrapperSuccess}>
-        <div className={s.successTitle}>Ваш отзыв принят</div>
-        <div className={s.successDescription}>
-          Спасибо за отзыв, после модерации мы его опубликуем!
+      {isSuccess ? (
+        <div className={s.wrapperSuccess}>
+          <div className={s.successTitle}>Ваш отзыв принят</div>
+          <div className={s.successDescription}>
+            Спасибо за отзыв, после модерации мы его опубликуем!
+          </div>
+          <CloseIcon onClick={handleCloseSubmitInfo} className={s.successClose}/>
         </div>
-        <CloseIcon className={s.successClose}/>
-      </div>
+      ) : null}
+      {errorMessage ? (
+        <div className={s.wrapperError}>
+          <div className={s.successTitle}>Ошибка</div>
+          <div className={s.successDescription}>
+            {errorMessage}
+          </div>
+          <CloseIcon onClick={handleCloseSubmitInfo} className={s.errorClose}/>
+        </div>
+      ) : null}
     </form>
   );
 };

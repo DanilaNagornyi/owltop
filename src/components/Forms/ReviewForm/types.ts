@@ -10,3 +10,7 @@ export interface ReviewUseFormTypes {
   description: string;
   rating: string;
 }
+
+export interface ReviewResponseTypes {
+  message: string;
+}

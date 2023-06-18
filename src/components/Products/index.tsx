@@ -43,7 +43,7 @@ const Products: FC<ProductsTypes> = ({product, className}) => {
         </div>
 
         <div className={s.rating}>
-          <Rating rating={product.reviewAvg ?? product.initialRating}/>
+          <Rating rating={String(product.reviewAvg) ?? product.initialRating}/>
         </div>
 
         <div className={s.tags}>
@@ -106,7 +106,7 @@ const Products: FC<ProductsTypes> = ({product, className}) => {
             <Divider/>
           </div>
         ))}
-        <ReviewForm productId={product._id}/>
+        <ReviewForm className={s.formReview} productId={product._id}/>
       </Card>
     </>
   );
