@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import type {FC} from 'react';
 import {ProductsTypes} from "./types";
 import Card from "../Card";
@@ -14,15 +14,24 @@ import Image from "next/image";
 import Review from "../Review";
 import ReviewForm from "../Forms/ReviewForm";
 
-const Products: FC<ProductsTypes> = ({product, className}) => {
+const Products: FC<ProductsTypes> = ({product, className, ...restProps}) => {
   const [isReviewOpen, setIsReviewOpen] = useState<boolean>(false);
-
+  const reviewRef = useRef<HTMLDivElement>(null);
   const handleShowReview = (): void => {
     setIsReviewOpen(!isReviewOpen);
   };
+
+  const handleScrollReview = () => {
+    setIsReviewOpen(true);
+    reviewRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  };
+
   return (
-    <>
-      <Card className={cn(s.card, className)}>
+    <div className={className} {...restProps}>
+      <Card className={s.card}>
         <div className={s.logo}>
           <Image
             src={process.env.NEXT_PUBLIC_DOMAIN + product.image}
@@ -51,8 +60,11 @@ const Products: FC<ProductsTypes> = ({product, className}) => {
         </div>
         <div className={s.priceTitle}>цена</div>
         <div className={s.creditTitle}>кредит</div>
-        <div
-          className={s.rateTitle}>{product.reviewCount} {declOfNum(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}</div>
+        <div className={s.rateTitle}>
+          <a href="#ref" onClick={handleScrollReview}>
+            {product.reviewCount} {declOfNum(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}
+          </a>
+        </div>
 
         <Divider className={s.line}/>
 
@@ -96,10 +108,14 @@ const Products: FC<ProductsTypes> = ({product, className}) => {
           </Button>
         </div>
       </Card>
-      <Card color="blue" className={cn(s.reviews, {
-        [s.opened]: isReviewOpen,
-        [s.closed]: !isReviewOpen,
-      })}>
+      <Card
+        color="blue"
+        className={cn(s.reviews, {
+          [s.opened]: isReviewOpen,
+          [s.closed]: !isReviewOpen,
+        })}
+        ref={reviewRef}
+      >
         {product.reviews.map(r => (
           <div key={r._id}>
             <Review review={r}/>
@@ -108,7 +124,7 @@ const Products: FC<ProductsTypes> = ({product, className}) => {
         ))}
         <ReviewForm className={s.formReview} productId={product._id}/>
       </Card>
-    </>
+    </div>
   );
 };
 
