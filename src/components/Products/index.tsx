@@ -14,6 +14,7 @@ import Image from "next/image";
 import Review from "../Review";
 import ReviewForm from "../Forms/ReviewForm";
 import {motion} from 'framer-motion';
+import {variantsAnimate} from "./constants";
 
 const Products = motion(forwardRef(({
                                       product,
@@ -113,22 +114,27 @@ const Products = motion(forwardRef(({
           </Button>
         </div>
       </Card>
-      <Card
-        color="blue"
-        className={cn(s.reviews, {
-          [s.opened]: isReviewOpen,
-          [s.closed]: !isReviewOpen,
-        })}
-        ref={reviewRef}
+
+      <motion.div
+        animate={isReviewOpen ? 'visible' : 'hidden'}
+        variants={variantsAnimate}
+        initial="hidden"
       >
-        {product.reviews.map(r => (
-          <div key={r._id}>
-            <Review review={r}/>
-            <Divider/>
-          </div>
-        ))}
-        <ReviewForm className={s.formReview} productId={product._id}/>
-      </Card>
+        <Card
+          color="blue"
+          className={s.reviews}
+          ref={reviewRef}
+        >
+          {product.reviews.map(r => (
+            <div key={r._id}>
+              <Review review={r}/>
+              <Divider/>
+            </div>
+          ))}
+          <ReviewForm className={s.formReview} productId={product._id}/>
+        </Card>
+      </motion.div>
+
     </div>
   );
 }));
