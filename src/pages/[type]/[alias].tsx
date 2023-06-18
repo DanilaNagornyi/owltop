@@ -10,9 +10,10 @@ import axios from "axios";
 import {firstLevelMenu} from "../../helpers/helpers";
 import {TopPagePropsTypes} from "../../components/PageComponents/TopPage/types";
 import TopPageComponent from "../../components/PageComponents/TopPage";
-import { wrapper} from "../../redux";
+import {wrapper} from "../../redux";
 import {setStaticMenu} from "../../redux/slices/menuSlice";
 import {setProductsSort} from "../../redux/slices/sortSlice";
+import {apiUrls} from "../../helpers/apiUrls";
 
 const TopPage: FC<TopPagePropsTypes> = ({firstCategory, page, products}) => {
 
@@ -24,7 +25,7 @@ export default withLayout(TopPage);
 export const getStaticPaths: GetStaticPaths = async () => {
   let paths: string[] = [];
   for (const m of firstLevelMenu) {
-    const {data: menu} = await axios.post<MenuItemTypes[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', {
+    const {data: menu} = await axios.post<MenuItemTypes[]>(apiUrls.topPage.find, {
       firstCategory: m.id
     });
     paths = paths.concat(menu.flatMap(s => s.pages.map(p => `/${m.route}/${p.alias}`)));
@@ -52,7 +53,7 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(store => as
   }
   try {
 
-    const {data: menu} = await axios.post<MenuItemTypes[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', {
+    const {data: menu} = await axios.post<MenuItemTypes[]>(apiUrls.topPage.find, {
       firstCategory: firstCategoryIcon.id,
     });
 
@@ -62,8 +63,8 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(store => as
       };
     }
 
-    const {data: page} = await axios.get<TopPageModelTypes>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/byAlias/' + params.alias);
-    const {data: products} = await axios.post<ProductModelTypes[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/product/find', {
+    const {data: page} = await axios.get<TopPageModelTypes>(apiUrls.topPage.byAlias + params.alias);
+    const {data: products} = await axios.post<ProductModelTypes[]>(apiUrls.product.find, {
       category: page.category,
       limit: 10,
     });

@@ -1,0 +1,80 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: [start] auto 1fr auto [end];
+  gap: 20px 30px;
+  align-items: center;
+
+  font-size: 14px;
+  line-height: 24px;
+
+  @media screen and (max-width: 1100px) {
+    grid-template-columns: [start] 1fr 1fr [end];
+  }
+
+  @media screen and (max-width: 640px) {
+    grid-template-columns: [start] 1fr [end];
+  }
+}
+
+.inputTitle {
+  justify-self: left;
+
+  @media screen and (max-width: 1100px) {
+    justify-self: normal;
+  }
+}
+
+.wrapperRating {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+
+  @media screen and (max-width: 1100px) {
+    grid-column: start / end;
+  }
+}
+
+.description, .wrapperSubmit {
+  grid-column: start / end;
+}
+
+.submitInfo {
+  margin-left: 14px;
+}
+
+.wrapperSuccess {
+  position: relative;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 6px;
+
+  background: var(--green-light);
+}
+
+.successTitle {
+  font-weight: bold;
+}
+
+.successClose {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.wrapperError {
+  position: relative;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 6px;
+
+  background: var(--red-light);
+}
+
+.errorClose {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  stroke: var(--black);
+}

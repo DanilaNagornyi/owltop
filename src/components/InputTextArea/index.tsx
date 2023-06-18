@@ -1,15 +1,25 @@
-import React from 'react';
-import type {FC} from 'react';
+import React, {ForwardedRef, forwardRef} from 'react';
 import cn from "classnames";
 
 import s from './InputTextArea.module.scss';
 import {TextAriaTypes} from "../InputText/types";
 
-const InputTextArea: FC<TextAriaTypes> = ({className, type = 'text', ...restProps}) => {
+const InputTextArea = forwardRef(({
+                                    className,
+                                    error,
+                                    ...restProps
+                                  }: TextAriaTypes, ref: ForwardedRef<HTMLTextAreaElement>) => {
 
   return (
-    <textarea className={cn(s.inputArea, className)} {...restProps} />
+    <div className={cn(s.wrapperArea, className)}>
+      <textarea className={cn(s.inputArea, {
+        [s.withError]: error,
+      })} ref={ref} {...restProps} />
+      {error?.message ? (
+        <span className={s.errorText}>{error.message}</span>
+      ) : null}
+    </div>
   );
-};
+});
 
 export default InputTextArea;

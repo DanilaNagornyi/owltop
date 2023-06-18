@@ -27,7 +27,7 @@ function Home() {
       <Tag color="primary" size='small'>Primary</Tag>
       <Tag color="grey" size='small'>Grey</Tag>
       <Tag color="green" size='medium'>Green</Tag>
-      <Rating rating={rating} isEditable setRating={setRating}/>
+      <Rating rating={String(rating)} isEditable setRating={setRating}/>
       <ul>
         {menu.map(m => (<li key={m._id.secondCategory}>{m._id.secondCategory}</li>))}
       </ul>
