@@ -1,4 +1,8 @@
-.star svg{
+.wrapper {
+  position: relative;
+}
+
+.star svg {
   margin-right: 5px;
 }
 
@@ -10,3 +14,13 @@
   cursor: pointer;
 }
 
+.withError svg {
+  fill: var(--red);
+}
+
+.errorText {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  color: var(--red);
+}
