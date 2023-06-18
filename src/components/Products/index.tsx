@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {ForwardedRef, forwardRef, useRef, useState} from 'react';
 import type {FC} from 'react';
 import {ProductsTypes} from "./types";
 import Card from "../Card";
@@ -13,8 +13,13 @@ import Divider from "../Divider";
 import Image from "next/image";
 import Review from "../Review";
 import ReviewForm from "../Forms/ReviewForm";
+import {motion} from 'framer-motion';
 
-const Products: FC<ProductsTypes> = ({product, className, ...restProps}) => {
+const Products = motion(forwardRef(({
+                                      product,
+                                      className,
+                                      ...restProps
+                                    }: ProductsTypes, ref: ForwardedRef<HTMLDivElement>) => {
   const [isReviewOpen, setIsReviewOpen] = useState<boolean>(false);
   const reviewRef = useRef<HTMLDivElement>(null);
   const handleShowReview = (): void => {
@@ -30,7 +35,7 @@ const Products: FC<ProductsTypes> = ({product, className, ...restProps}) => {
   };
 
   return (
-    <div className={className} {...restProps}>
+    <div className={className} {...restProps} ref={ref}>
       <Card className={s.card}>
         <div className={s.logo}>
           <Image
@@ -126,6 +131,6 @@ const Products: FC<ProductsTypes> = ({product, className, ...restProps}) => {
       </Card>
     </div>
   );
-};
+}));
 
 export default Products;

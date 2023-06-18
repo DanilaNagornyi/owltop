@@ -4,7 +4,6 @@ import cn from "classnames";
 
 import s from './Card.module.scss';
 
-
 const Card = forwardRef(({
                            color = 'white',
                            children,
