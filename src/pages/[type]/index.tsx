@@ -3,7 +3,6 @@ import type {FC} from 'react';
 import {withLayout} from "../../layout";
 import {GetStaticPaths, GetStaticProps, GetStaticPropsContext} from "next";
 import {firstLevelMenu} from "../../helpers/helpers";
-import axios from "axios";
 import {MenuItemTypes} from "../../interfaces/menu.interface";
 import {ParsedUrlQuery} from "querystring";
 import {TopLevelCategoryTypes} from "../../interfaces/page.interface";

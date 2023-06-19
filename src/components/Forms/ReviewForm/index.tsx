@@ -21,7 +21,6 @@ const ReviewForm: FC<ReviewFormTypes> = ({productId, className, ...restProps}) =
   const onSubmit = async (formData: ReviewUseFormTypes) => {
     try {
       const {data} = await axios.post<ReviewResponseTypes>(apiUrls.review.createReview, {...formData, productId});
-      console.log('response-->>.', data);
       if (data.message) {
         setIsSuccess(true);
         reset();
