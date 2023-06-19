@@ -15,8 +15,13 @@ import {setStaticMenu} from "../../redux/slices/menuSlice";
 import {setProductsSort} from "../../redux/slices/sortSlice";
 import {apiUrls} from "../../helpers/apiUrls";
 import Head from "next/head";
+import Page404 from "../../components/PageComponents/Page404";
 
 const TopPage: FC<TopPagePropsTypes> = ({firstCategory, page, products}) => {
+
+  if (!page && !products) {
+    return <Page404/>;
+  }
 
   return (
     <>
