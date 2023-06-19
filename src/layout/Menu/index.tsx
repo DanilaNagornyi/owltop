@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, {useState} from "react";
+import type {KeyboardEvent} from 'react';
 import {FirstLevelMenuItemTypes, PageItemTypes} from "../../interfaces/menu.interface";
 import s from './Menu.module.scss';
 import cn from "classnames";
@@ -20,6 +21,13 @@ export default function Menu(): JSX.Element {
       setActiveMenu('');
     } else {
       setActiveMenu(secondCategory);
+    }
+  };
+
+  const handleOpenSecondLevelKey = (key: KeyboardEvent, secondCategory: string) => {
+    if (key.code === 'Space' || key.code === 'Enter') {
+      key.preventDefault();
+      handleOpenSecondLevel(secondCategory);
     }
   };
 
@@ -51,8 +59,11 @@ export default function Menu(): JSX.Element {
 
           return (
             <div key={m._id.secondCategory}>
-              <div className={s.secondLevel}
-                   onClick={() => handleOpenSecondLevel(m._id.secondCategory)}>{m._id.secondCategory}</div>
+              <div
+                tabIndex={0}
+                onKeyDown={(key: KeyboardEvent) => handleOpenSecondLevelKey(key, m._id.secondCategory)}
+                className={s.secondLevel}
+                onClick={() => handleOpenSecondLevel(m._id.secondCategory)}>{m._id.secondCategory}</div>
               <motion.div
                 layout
                 // @ts-ignore TS ругает transition, поправлю позже
@@ -88,9 +99,9 @@ export default function Menu(): JSX.Element {
   };
 
   return (
-    <div className={s.menu}>
+    <nav className={s.menu}>
       {/*<div className={s.secondLevelBlock}>test</div>*/}
       {buildFirstLevel()}
-    </div>
+    </nav>
   );
 }
