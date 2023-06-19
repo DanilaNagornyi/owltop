@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {ForwardedRef, forwardRef, useRef, useState} from 'react';
 import type {FC} from 'react';
 import {ProductsTypes} from "./types";
 import Card from "../Card";
@@ -13,8 +13,14 @@ import Divider from "../Divider";
 import Image from "next/image";
 import Review from "../Review";
 import ReviewForm from "../Forms/ReviewForm";
+import {motion} from 'framer-motion';
+import {variantsAnimate} from "./constants";
 
-const Products: FC<ProductsTypes> = ({product, className, ...restProps}) => {
+const Products = motion(forwardRef(({
+                                      product,
+                                      className,
+                                      ...restProps
+                                    }: ProductsTypes, ref: ForwardedRef<HTMLDivElement>) => {
   const [isReviewOpen, setIsReviewOpen] = useState<boolean>(false);
   const reviewRef = useRef<HTMLDivElement>(null);
   const handleShowReview = (): void => {
@@ -30,7 +36,7 @@ const Products: FC<ProductsTypes> = ({product, className, ...restProps}) => {
   };
 
   return (
-    <div className={className} {...restProps}>
+    <div className={className} {...restProps} ref={ref}>
       <Card className={s.card}>
         <div className={s.logo}>
           <Image
@@ -108,24 +114,29 @@ const Products: FC<ProductsTypes> = ({product, className, ...restProps}) => {
           </Button>
         </div>
       </Card>
-      <Card
-        color="blue"
-        className={cn(s.reviews, {
-          [s.opened]: isReviewOpen,
-          [s.closed]: !isReviewOpen,
-        })}
-        ref={reviewRef}
+
+      <motion.div
+        animate={isReviewOpen ? 'visible' : 'hidden'}
+        variants={variantsAnimate}
+        initial="hidden"
       >
-        {product.reviews.map(r => (
-          <div key={r._id}>
-            <Review review={r}/>
-            <Divider/>
-          </div>
-        ))}
-        <ReviewForm className={s.formReview} productId={product._id}/>
-      </Card>
+        <Card
+          color="blue"
+          className={s.reviews}
+          ref={reviewRef}
+        >
+          {product.reviews.map(r => (
+            <div key={r._id}>
+              <Review review={r}/>
+              <Divider/>
+            </div>
+          ))}
+          <ReviewForm className={s.formReview} productId={product._id}/>
+        </Card>
+      </motion.div>
+
     </div>
   );
-};
+}));
 
 export default Products;

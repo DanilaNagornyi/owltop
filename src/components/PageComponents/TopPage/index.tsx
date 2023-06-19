@@ -34,7 +34,7 @@ const TopPageComponent: FC<TopPagePropsTypes> = ({firstCategory, page, products}
       </div>
 
       <div>
-        {sortProducts && sortProducts.map(p => (<Products product={p} key={p._id}/>))}
+        {sortProducts && sortProducts.map(p => (<Products layout product={p} key={p._id}/>))}
       </div>
 
       <div className={s.wrapperHH}>
@@ -57,7 +57,6 @@ const TopPageComponent: FC<TopPagePropsTypes> = ({firstCategory, page, products}
       <HTag className={s.skillsTitle} tag="h2">Получаемые навыки</HTag>
       <div className={s.skillsTagWrapper}>
         {page.tags.map(tag => <Tag key={tag} color="primary" size="medium">{tag}</Tag>)}
-
       </div>
     </div>
   );

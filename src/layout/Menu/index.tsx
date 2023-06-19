@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, {useState} from "react";
 import {FirstLevelMenuItemTypes, PageItemTypes} from "../../interfaces/menu.interface";
 import s from './Menu.module.scss';
@@ -6,12 +7,14 @@ import {useAppSelector} from "../../redux";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import {firstLevelMenu} from "../../helpers/helpers";
-
+import {motion} from 'framer-motion';
+import {variants, variantsChildren} from "./data";
 
 export default function Menu(): JSX.Element {
   const {menu, firstCategory} = useAppSelector(state => state.menu);
   const [activeMenu, setActiveMenu] = useState('');
   const router = useRouter();
+
   const handleOpenSecondLevel = (secondCategory: string): void => {
     if (activeMenu && secondCategory === activeMenu) {
       setActiveMenu('');
@@ -50,11 +53,16 @@ export default function Menu(): JSX.Element {
             <div key={m._id.secondCategory}>
               <div className={s.secondLevel}
                    onClick={() => handleOpenSecondLevel(m._id.secondCategory)}>{m._id.secondCategory}</div>
-              <div className={cn(s.secondLevelMenu, {
-                [s.secondLevelBlockOpened]: isOpened || activeMenu === m._id.secondCategory,
-              })}>
+              <motion.div
+                layout
+                // @ts-ignore TS ругает transition, поправлю позже
+                variants={variants}
+                initial={isOpened || activeMenu === m._id.secondCategory ? 'visible' : 'hidden'}
+                animate={isOpened || activeMenu === m._id.secondCategory ? 'visible' : 'hidden'}
+                className={s.secondLevelMenu}
+              >
                 {buildThirdLevel(m.pages, menuItem.route)}
-              </div>
+              </motion.div>
             </div>
           );
         })}
@@ -65,11 +73,16 @@ export default function Menu(): JSX.Element {
   const buildThirdLevel = (pages: PageItemTypes[], route: string) => {
     return (
       pages.map(p => (
-        <Link href={`/${route}/${p.alias}`} key={p.alias} className={cn(s.thirdLevel, {
-          [s.thirdLevelActive]: `/${route}/${p.alias}` === router.asPath
-        })}>
-          {p.category}
-        </Link>
+        <motion.div
+          key={p.alias}
+          variants={variantsChildren}
+        >
+          <Link href={`/${route}/${p.alias}`} className={cn(s.thirdLevel, {
+            [s.thirdLevelActive]: `/${route}/${p.alias}` === router.asPath
+          })}>
+            {p.category}
+          </Link>
+        </motion.div>
       ))
     );
   };
