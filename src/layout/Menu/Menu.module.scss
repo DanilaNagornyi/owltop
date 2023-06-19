@@ -65,6 +65,7 @@
   font-size: 14px;
   line-height: 19px;
   transition: .2s;
+  outline-offset: -1px;
 
   &:hover {
     color: var(--primary);

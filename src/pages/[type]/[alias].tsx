@@ -17,7 +17,9 @@ import {apiUrls} from "../../helpers/apiUrls";
 
 const TopPage: FC<TopPagePropsTypes> = ({firstCategory, page, products}) => {
 
-  return <TopPageComponent page={page} firstCategory={firstCategory} products={products}/>;
+  return (
+    <TopPageComponent page={page} firstCategory={firstCategory} products={products}/>
+  );
 };
 
 export default withLayout(TopPage);
