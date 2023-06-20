@@ -1,5 +1,4 @@
 import React, {ForwardedRef, forwardRef, useRef, useState} from 'react';
-import type {FC} from 'react';
 import {ProductsTypes} from "./types";
 import Card from "../Card";
 

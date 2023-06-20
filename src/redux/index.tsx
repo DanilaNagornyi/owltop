@@ -5,32 +5,13 @@ import {createWrapper} from "next-redux-wrapper";
 import sortReducer from "./slices/sortSlice";
 
 const makeStore = () => {
-  // const publicRuntimeConfig = getRuntimeConfig();
-  // const { app }: PublicRuntimeConfig = publicRuntimeConfig;
-  // const { isDev } = app.env;
-
   return configureStore({
     reducer: {
       menu: menuReducer,
       sort: sortReducer,
     }
-
-    // middleware: getDefaultMiddleware => {
-    //   if (isDev) {
-    //     return getDefaultMiddleware().concat(logger);
-    //   } else {
-    //     return getDefaultMiddleware();
-    //   }
-    // },
-    // devTools: isDev,
   });
 };
-
-// const store = configureStore({
-//     reducer: {
-//         menu: menuReducer,
-//     }
-// });
 
 export type AppStore = ReturnType<typeof makeStore>;
 export type AppState = ReturnType<AppStore['getState']>;
@@ -41,7 +22,6 @@ export interface HydrateAction<T> extends Action {
   };
 }
 
-// export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = AppStore['dispatch'];
 export const wrapper = createWrapper<AppStore>(makeStore, {
   debug: false,
@@ -49,4 +29,3 @@ export const wrapper = createWrapper<AppStore>(makeStore, {
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;
 
-// export default store;

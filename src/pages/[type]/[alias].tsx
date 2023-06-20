@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import type {FC} from 'react';
 import {MenuItemTypes} from "../../interfaces/menu.interface";
 import {TopPageModelTypes} from "../../interfaces/page.interface";
@@ -14,11 +14,26 @@ import {wrapper} from "../../redux";
 import {setStaticMenu} from "../../redux/slices/menuSlice";
 import {setProductsSort} from "../../redux/slices/sortSlice";
 import {apiUrls} from "../../helpers/apiUrls";
+import Head from "next/head";
+import Page404 from "../../components/PageComponents/Page404";
 
 const TopPage: FC<TopPagePropsTypes> = ({firstCategory, page, products}) => {
 
+  if (!page && !products) {
+    return <Page404/>;
+  }
+
   return (
-    <TopPageComponent page={page} firstCategory={firstCategory} products={products}/>
+    <>
+      <Head>
+        <title>{page.metaTitle}</title>
+        <meta name="description" content={page.metaDescription}/>
+        <meta property="og:title" content={page.metaTitle}/>
+        <meta property="og:description" content={page.metaDescription}/>
+        <meta property="og:type" content="article"/>
+      </Head>
+      <TopPageComponent page={page} firstCategory={firstCategory} products={products}/>
+    </>
   );
 };
 

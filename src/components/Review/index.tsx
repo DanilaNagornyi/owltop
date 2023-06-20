@@ -23,7 +23,7 @@ const Review: FC<ReviewTypes> = ({review, className, ...restProps}) => {
         {format(new Date(createdAt), 'dd MMMM yyyy', {locale: ru})}
       </div>
       <div className={s.rating}>
-        <Rating rating={rating}/>
+        <Rating rating={String(rating)}/>
       </div>
       <div className={s.description}>
         {description}

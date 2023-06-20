@@ -9,7 +9,6 @@ const findMenuFirstThunk = createAsyncThunk(
   'menu/findMenuFirstThunk',
   async (_, {getState}) => {
     const state = getState();
-    console.log('stateeeee====>>', state);
     const {
       data: menu,
       status,
