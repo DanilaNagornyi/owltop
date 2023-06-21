@@ -5,8 +5,7 @@
 <br/>
 <br/>
 
-https://github.com/DanilaNagornyi/owltop/assets/64028251/d143887d-ac55-47c3-b3fa-7da7aec11e4a
-
+<img width="1719" alt="Main" src="https://github.com/DanilaNagornyi/owltop/assets/64028251/18d22bb4-31ae-48c1-97bc-c6dee6ae9c10">
 
 
 <br/>
@@ -24,6 +23,9 @@ npm run dev
 ```
 <br/>
 <br/>
+
+https://github.com/DanilaNagornyi/owltop/assets/64028251/d143887d-ac55-47c3-b3fa-7da7aec11e4a
+
 
 <h3>Технологии проекта</h3>
 <p>
