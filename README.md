@@ -5,7 +5,8 @@
 <br/>
 <br/>
 
-<img width="1719" alt="Main" src="https://github.com/DanilaNagornyi/owltop/assets/64028251/e33e064b-e4a5-484b-bd97-b4a0d1659a5f">
+https://github.com/DanilaNagornyi/owltop/assets/64028251/d143887d-ac55-47c3-b3fa-7da7aec11e4a
+
 
 
 <br/>
@@ -17,6 +18,8 @@ npm i
 и
 
 ```javascript
+
+
 npm run dev
 ```
 <br/>
